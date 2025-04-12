@@ -1,11 +1,12 @@
 import React from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { useState } from 'react'
 import Axios from 'axios'
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
     Axios.post("http://localhost:8080/api/user/login", {
@@ -14,6 +15,10 @@ const Signin = () => {
     }).then(response => {
       console.log(response);
       e.target.reset();
+      localStorage.setItem("token", response.data.token);
+      navigate("/profile"); // Redirect to profile page
+
+
     }).catch(error => {
       console.log(error);
     });
