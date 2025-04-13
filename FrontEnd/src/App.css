@@ -54,3 +54,13 @@ button{
     cursor: pointer;
     border-radius: 5px;
 }
+
+.profile{
+    color: #000;
+}
+.logout{
+    background-color: #f44336; /* Red */
+}
+.logout:hover{
+    background-color: #d32f2f; /* Darker Red */
+}
