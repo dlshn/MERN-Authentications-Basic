@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [user, setUser] = useState(null);
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -23,6 +25,11 @@ const Profile = () => {
     return <p>Loading user data...</p>;
   }
 
+  const logout = () => {
+    localStorage.removeItem("token"); // Remove token from local storage
+    navigate("/signin"); // Redirect to sign-in page
+  }
+
   return (
     <>
     <div className='profile'>
@@ -30,6 +37,7 @@ const Profile = () => {
         <p>Welcome, {user.firstName}!</p>
         <p>Email: {user.email}</p>
         <p>Last Name: {user.lastName}</p>
+        <button className='logout' onClick={logout}>Logout</button>
     </div>
     </>
   );
